@@ -12,10 +12,9 @@ jobs:
     steps:
       - name: change
         run: |
-          ss -ltu
+          cat /etc/hostname
           cat /etc/hosts
-          ps aux
-          cat /etc/resolv.conf
+          docker --help
           
       # - name: runch dockerhub
       #   run: |
