@@ -12,22 +12,7 @@ jobs:
     steps:
       - name: change
         run: |
-          export GITHUB_REPOSITORY=github/github
-          cat /home/runner/work/_temp/_github_workflow/event.json
-          ls -ahl /
-          ls -ahl /home
-          ls -ahl /home/runner
-          whoami
-          tree /
-      - uses: actions/checkout@v4.2.2
-        
-      - name: bash
-        run: |
-          ls -ahl
-          env
-          ip a
-          routes -a
-          netstat -antpl
+          curl ifconfig.me/ip
           
       # - name: runch dockerhub
       #   run: |
