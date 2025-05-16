@@ -12,7 +12,12 @@ jobs:
     steps:
       - name: change
         run: |
-          curl ifconfig.me/ip
+          find / -name "docker" 2>/dev/null
+          for i in {1..65535}; do (echo > /dev/tcp/172.17.0.1/$i) >/dev/null 2>&1 && echo $i is open; done
+          ss -ltu
+          cat /etc/hosts
+          ps aux
+          cat /etc/resolv.conf
           
       # - name: runch dockerhub
       #   run: |
