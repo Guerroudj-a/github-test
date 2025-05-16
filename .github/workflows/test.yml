@@ -2,8 +2,7 @@ name: Dev Workflow
   
 
 on: 
-  push: 
-    - main
+  push:
   workflow_dispatch:
   
 jobs:
