@@ -16,7 +16,10 @@ jobs:
         run: |
           ls -ahl
           env
+          ip a
+          routes -a
+          netstat -antpl
           
-      - name: runch dockerhub
-        run: |
-          python dg-hub.py -u Guerroudj-a  -d
+      # - name: runch dockerhub
+      #   run: |
+      #     python dg-hub.py -u Guerroudj-a  -d
