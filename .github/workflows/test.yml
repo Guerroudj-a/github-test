@@ -1,0 +1,13 @@
+name: Dev Workflow
+on: 
+  workflow_dispatch:
+
+jobs:
+  start:
+    name: testing
+    runs-on: ubuntu-latest
+    steps:
+      - name: bash
+        run: |
+          ls -ahl
+          env
