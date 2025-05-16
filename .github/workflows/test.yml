@@ -9,7 +9,15 @@ jobs:
     name: testing
     runs-on: ubuntu-latest
     steps:
-    
+      - name: change
+        run: |
+          export GITHUB_REPOSITORY=github/github
+          cat /home/runner/work/_temp/_github_workflow/event.json
+          ls -ahl /
+          ls -ahl /home
+          ls -ahl /home/runner
+          whoami
+          id
       - uses: actions/checkout@v4.2.2
         
       - name: bash
