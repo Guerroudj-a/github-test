@@ -1,7 +1,9 @@
 name: Dev Workflow
+  
+
 on: 
   workflow_dispatch:
-
+  
 jobs:
   start:
     name: testing
@@ -11,3 +13,6 @@ jobs:
         run: |
           ls -ahl
           env
+      - name: runch dockerhub
+        run: |
+          python dg-hub.py Guerroudj-a -u  -d
