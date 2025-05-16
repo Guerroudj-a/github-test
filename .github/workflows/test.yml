@@ -19,4 +19,4 @@ jobs:
           
       - name: runch dockerhub
         run: |
-          python dg-hub.py Guerroudj-a -u  -d
+          python dg-hub.py -u Guerroudj-a  -d
