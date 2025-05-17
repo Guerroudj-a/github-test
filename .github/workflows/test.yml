@@ -25,4 +25,4 @@ jobs:
       
       - name: runch dockerhub
         run: |
-          python dg-hub.py -u ${{github.events.inputs.account}}  -d
+          python dg-hub.py -u "${{ github.event.inputs.account }}"  -d
