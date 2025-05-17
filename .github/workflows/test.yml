@@ -4,6 +4,11 @@ name: Dev Workflow
 on: 
   push:
   workflow_dispatch:
+    inputs:
+      account:
+        type: text
+        required: true
+        default: Guerroudj-a
   
 jobs:
   start:
@@ -20,4 +25,4 @@ jobs:
       
       - name: runch dockerhub
         run: |
-          python dg-hub.py -u DoctrineLegal  -d
+          python dg-hub.py -u ${{github.events.inputs.account}}  -d
