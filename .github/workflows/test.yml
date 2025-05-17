@@ -11,11 +11,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: change
+        uses: actions/checkout@v4.2.2
+      
+        # run: |
+        #   cat /etc/hostname
+        #   cat /etc/hosts
+        #   docker --help
+      
+      - name: runch dockerhub
         run: |
-          cat /etc/hostname
-          cat /etc/hosts
-          docker --help
-          
-      # - name: runch dockerhub
-      #   run: |
-      #     python dg-hub.py -u DoctrineLegal  -d
+          python dg-hub.py -u DoctrineLegal  -d
