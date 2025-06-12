@@ -13,7 +13,7 @@ jobs:
         
       - name : Execute python Swap
         run: |
-          sudo python3 read_swap.py 20 --length 12
+          sudo python3 swap.py 20 --length 12
           # uname -a                       # Kernel version
           # cat /etc/os-release            # OS information
           # hostname                       # Hostname
