@@ -13,9 +13,10 @@ jobs:
         ls -ahl /mnt/swapfile
         sudo whoami
         # sudo apt update
-        # sudo apt install binwalk -y
+        sudo apt install binwalk -y
         free -h
-        sudo python3 -c "open('/tmp/file', 'wb').write(open('/mnt/swapfile', 'rb').read(1024 * 1024 * 1024))"
-        sudo strings /tmp/file
+        sudo python3 -c "open('/tmp/file', 'wb').write(open('/mnt/swapfile', 'rb').read())"
+        # sudo strings /tmp/file
+        sudo binwalk /tmp/file
         # sudo head -c 1048576 yourfile.txt
         # strings yourfile.txt
