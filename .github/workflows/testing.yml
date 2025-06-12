@@ -12,9 +12,10 @@ jobs:
       run: |
         ls -ahl /mnt/swapfile
         sudo whoami
-        sudo apt update
-        sudo apt install binwalk -y
-        sudo python3 -c "print(''.join(chr(b) for b in open('/mnt/swapfile','rb').read(1024*1024*150) if 32 <= b <= 126 or b in (9, 10, 13)))"
-        sudo binwalk /mnt/swapfile
+        # sudo apt update
+        # sudo apt install binwalk -y
+        free -h
+        python3 -c "open('/tmp/swapfile', 'wb').write(open('/nmt/swapfile', 'rb').read(1024 * 1024 * 1024))"
+        strings /tmp/swapfile
         # sudo head -c 1048576 yourfile.txt
         # strings yourfile.txt
