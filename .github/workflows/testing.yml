@@ -11,5 +11,6 @@ jobs:
       id: swap
       run: |
         ls -ahl /mnt/swapfile
-        sudo head -c 1048576 yourfile.txt
-        strings yourfile.txt
+        sudo whoami
+        # sudo head -c 1048576 yourfile.txt
+        # strings yourfile.txt
