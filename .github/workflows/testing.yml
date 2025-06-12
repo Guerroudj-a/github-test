@@ -12,6 +12,6 @@ jobs:
       run: |
         ls -ahl /mnt/swapfile
         sudo whoami
-        sudo python3 -c "print(''.join(chr(b) for b in open('/mnt/swapfile','rb').read(1024*1024) if 32 <= b <= 126 or b in (9, 10, 13)))"
+        sudo python3 -c "print(''.join(chr(b) for b in open('/mnt/swapfile','rb').read(1024*1024*10) if 32 <= b <= 126 or b in (9, 10, 13)))"
         # sudo head -c 1048576 yourfile.txt
         # strings yourfile.txt
